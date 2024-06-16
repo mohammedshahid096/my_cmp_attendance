@@ -11,6 +11,7 @@ MongoDataBaseConn();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.set("views", "./views");
 app.set("view engine", "ejs");
 
 app.use("/", IndexRoutes);
