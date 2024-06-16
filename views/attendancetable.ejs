@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="relative overflow-x-auto p-5">
+      <h1 class="text-3xl text-center font-bold mb-2">
+        Month Attendance (<%= analytics.monthName %>)
+      </h1>
+      <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+          <tr>
+            <th scope="col" class="px-6 py-3">S.No</th>
+            <th scope="col" class="px-6 py-3">_id</th>
+            <th scope="col" class="px-6 py-3">Date</th>
+            <th scope="col" class="px-6 py-3">Day</th>
+            <th scope="col" class="px-6 py-3">Absent</th>
+            <th scope="col" class="px-6 py-3">In Time</th>
+            <th scope="col" class="px-6 py-3">Out Time</th>
+            <th scope="col" class="px-6 py-3">Difference (min)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% data.forEach(entry => { %>
+          <tr class="bg-white border-b">
+            <td
+              scope="row"
+              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+            >
+              <%= entry.index%>
+            </td>
+            <td scope="row" class="px-6 py-4"><%= entry.id %></td>
+            <td class="px-6 py-4"><%= entry.Date %></td>
+            <td class="px-6 py-4"><%= entry.Day %></td>
+            <td class="px-6 py-4"><%= entry.isPresent %></td>
+            <td class="px-6 py-4"><%= entry.InTime %></td>
+            <td class="px-6 py-4"><%= entry.outTime %></td>
+            <td class="px-6 py-4"><%= entry.difference %></td>
+          </tr>
+          <% }) %>
+          <tr class="bg-white border-b">
+            <td colspan="7" class="px-6 py-4 text-right font-bold">Total :</td>
+            <td class="px-6 py-4 border-y-2 border-black">
+              <%= analytics.workedHours %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="relative overflow-x-auto p-5">
+      <h1 class="text-3xl text-center font-bold mb-2">Analytics</h1>
+      <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+          <tr>
+            <th scope="col" class="px-6 py-3">Total Days</th>
+            <th scope="col" class="px-6 py-3">Total Hours</th>
+            <th scope="col" class="px-6 py-3">Total Hours Worked</th>
+            <th scope="col" class="px-6 py-3">Total Deficient Hours</th>
+            <th scope="col" class="px-6 py-3">Over Worked Hours</th>
+            <th scope="col" class="px-6 py-3">Absent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bg-white border-b">
+            <td scope="row" class="px-6 py-4 text-green-400">
+              <%= analytics.totalDays %>
+            </td>
+            <td scope="row" class="px-6 py-4 text-purple-400">
+              <%= analytics.totalHours %>
+            </td>
+            <td scope="row" class="px-6 py-4 text-cyan-400">
+              <%= analytics.workedHours %>
+            </td>
+            <td scope="row" class="px-6 py-4 text-red-400">
+              <%= analytics.deficitHours %>
+            </td>
+            <td scope="row" class="px-6 py-4 text-green-400">
+              <%= analytics.overWorkedHours %>
+            </td>
+            <td scope="row" class="px-6 py-4 text-orange-400">
+              <%= analytics.totalAbsentsDays %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

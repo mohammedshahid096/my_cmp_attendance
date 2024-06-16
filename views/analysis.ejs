@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attendance Line Chart</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div id="attendance-chart"></div>
+
+    <script>
+       function init() {
+
+            // Sample data from the provided object
+
+            let data = <%- JSON.stringify(analytics_data) %>;
+        // Convert the data into series data for ApexCharts
+        const attendanceDates = data.map(item => new Date(item.attendanceDate).toISOString());
+        const inTimes = data.map((item) => new Date(item.inTime).getTime());
+        const outTimes = data.map((item) => new Date(item.outTime).getTime());
+        console.table(outTimes);
+
+        // ApexCharts options
+        const options = {
+          chart: {
+            type: "line",
+            height: 350,
+          },
+          dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          width: 5,
+          curve: 'smooth'
+        },
+          series: [
+            {
+              name: "In Time",
+              data: inTimes,
+            },
+            {
+              name: "Out Time",
+              data: outTimes,
+            },
+          ],
+          xaxis: {
+            type: "datetime",
+            categories: attendanceDates,
+          },
+          title: {
+            text: "Attendance In and Out Times",
+            align: "left",
+          },
+          yaxis: {
+            labels: {
+              formatter: function (value) {
+                return new Date(value).toLocaleTimeString();
+              },
+            },
+            title: {
+              text: "Time",
+            },
+          },
+        };
+
+        // Render the chart
+        console.table(options.series);
+
+        const chart = new ApexCharts(
+          document.querySelector("#attendance-chart"),
+          options
+        );
+        chart.render();
+      }
+
+      init();
+    </script>
+  </body>
+</html>
