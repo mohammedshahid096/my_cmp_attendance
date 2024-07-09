@@ -89,7 +89,7 @@
         <div>
           <h1 class="text-3xl text-center">Get Attendance</h1>
           <form class="max-w-sm mx-auto" method="post" action="/getAttendance/all">
-            <div class="mb-5">
+            <div class="mb-2">
               <label
                 for="email"
                 class="block mb-2 text-sm font-medium text-gray-900"
@@ -103,6 +103,23 @@
                 name="email"
                 required
               />
+
+            </div>
+            <div class="mb-5">
+              <label
+                for="setmonth"
+                class="block mb-2 text-sm font-medium text-gray-900"
+                >Attendance Month</label
+              >
+              <input
+                type="month"
+                id="setmonth"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="name@flowbite.com"
+                name="month"
+                required
+              />
+
             </div>
     
    
@@ -117,5 +134,10 @@
         </div>
       </div>
     </div>
+    <script>
+      const date = new Date();
+      let current = date.getFullYear()+"-"+(date.getMonth()+1);
+      document.getElementById("setmonth").value = current.length === 6? current.replace("-","-0"):current;
+    </script>
   </body>
 </html>

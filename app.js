@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
+var moment = require("moment-timezone");
 
 const MongoDataBaseConn = require("./Config/mongodb.config");
 const IndexRoutes = require("./Routes/index.routes");
@@ -13,6 +14,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.set("views", "./views");
 app.set("view engine", "ejs");
+// moment.tz.setDefault("America/Los_Angeles");
+moment.tz.setDefault("Asia/Kolkata");
 
 app.use("/", IndexRoutes);
 
@@ -41,4 +44,5 @@ const port = process.env.PORT || 8001;
 app.listen(port, () => {
   console.log("Server Mode : ", process.env.DEVELOPMENT_MODE);
   console.log(`server is running on http://localhost:${port}`);
+  // console.log(moment().format("LLL"));
 });

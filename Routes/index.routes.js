@@ -6,7 +6,7 @@ const {
   MenuController,
   UpdateAttendanceController,
   AnalyticsController,
-} = require("../Controllers/test.controller");
+} = require("../Controllers/attendance.controller");
 
 const IndexRoutes = express.Router();
 
